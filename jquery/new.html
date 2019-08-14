@@ -1,0 +1,196 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+            <link rel="canonical" href="https://getbootstrap.com/docs/4.3/components/pagination/">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="jquery.twbsPagination.min.js"></script>    
+            <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       
+
+ <link href="D:\HTML\bootstrap\css\bootstrap.css" rel="stylesheet"/>
+ <link href="D:\HTML\bootstrap\css\bootstrap-responsive.css" rel="stylesheet"/>
+        <link href="./jsonex.css" rel="stylesheet">
+        
+        
+        <script>
+            var pagePointer=0;
+            function a(btnvalue){
+                $("tbody").children().remove();
+                pagePointer=btnvalue;
+             $.ajax({
+                url: "https://reqres.in/api/users?page="+btnvalue,
+                data: {},
+                beforeSend: function(){}
+                }).done(function(response) {
+                    var trArr = new Array();
+                    $.each(response.data, function(i, v){
+                        trArr.push('<tr><td>' + v.first_name  + '</td><td>' + v.email + '</td><td><img id="img" src="' 
+                        + v.avatar + '" width="100px" /></td><td> <a class="edit"  id="ed" title="Edit" data-toggle="modal" data-target="#formModal"><i  class="material-icons">&#xE254;</i></a>  <a class="delete" id="delete" title="Delete" data-toggle="modal" data-target="#deletemodal" ><i class="material-icons">&#xE872;</i></a>' + 
+                        '</td></tr>' );
+                    });
+                    $('table#alk-table tbody').append(trArr.join('\n'));
+                });
+                }
+             $(document).ready(function(){
+               
+             a(1);
+                
+                //editing
+                $(document).on("click", ".edit",function(){
+                    $.ajax({
+                        url: "https://reqres.in/api/users/2",
+                        type: "PUT",
+                        data: {
+                    first_name:name1,
+                    last_name:lname,
+                    email : email1,
+                     },
+                        
+                        success: function(response){
+                        console.log(response);
+                        }
+                    });
+                });
+            
+                //delete
+                $(document).on("click", ".delete", function(){
+                    $.ajax({
+                    url: "https://reqres.in/api/users/2",
+                    type: "DELETE",
+                    data :{
+                    first_name:name1,
+                    last_name:lname,
+                    email : email1,
+                     },
+          
+                    success: function(response){
+                    console.log(response);
+                }
+            });
+        });
+
+        });
+
+    var name1= document.getElementById('firstname');
+            var email1= document.getElementById('email');
+            var lname =  document.getElementById('lastname');
+            $(document).ready(function(){
+            $('.submit').click(function(){
+                
+            $.ajax({
+            url: "https://reqres.in/api/users",
+            type: "POST",
+            data :
+            {
+                    first_name:name1,
+                    last_name:lname,
+                    email : email1,
+            },
+            success: function(response){
+                console.log(response);                
+            }
+        });
+        });
+        });
+
+        </script>
+
+    </head>
+
+    <body>
+        <div class="container1">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="rowspan">
+                        <div class="colspan" style="margin-top: 20px"><h2>User <b>Lists</b></h2></div>
+                        <div class="colspan" style="margin-bottom: 10px; margin-right: 500px">
+                            <button type="button" style="margin-bottom: 20px" class="btn btn-info add-new" id="add"   data-toggle="modal" data-target="#formModal"><i class="fa fa-plus"></i> Add New</button>
+                        </div>
+                    </div>
+                </div>
+                <table id="alk-table" class="table table-bordered" >
+                        <thead><tr><th>Name</th><th>Email_address</th><th>Avatar</th><th>Actions</th></tr></thead>
+                        <tbody></tbody>
+                </table>
+                <div style="margin-left: 400px" >
+                        <nav aria-label="Page navigation example">
+                                <ul class="pagination" id="example">
+                                  <li class="page-item"><a class="page-link" href="#" onclick="a(pagePointer-1)">&lt;</a></li>
+                                  <li class="page-item"><a class="page-link" href="#" onclick="a(1)">1</a></li>
+                                  <li class="page-item"><a class="page-link" href="#" onclick="a(2)">2</a></li>
+                                  <li class="page-item"><a class="page-link" href="#" onclick="a(3)"> 3</a></li>
+                                  <li class="page-item"><a class="page-link" href="#" onclick="a(pagePointer+1)">&gt;</a></li>
+                                </ul>
+                        </nav>
+                </div>
+            </div>     
+        </div>
+
+       
+            <div class="modal" role="document"  id="deletemodal" tabindex="-1" role="dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete ?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+         
+          
+          <div class="modal" role="document"  id="formModal" tabindex="-1" role="dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">User Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form >
+
+                    <div class="userform" style="margin-left: 20px">
+        
+                    <label for="input">First Name</label>
+                    <input type="text" name="name" id="firstname" placeholder="John" >
+        
+                    <label for="input">Last Name</label>
+                    <input type="text" name="name" id="lastname" placeholder="Doe">
+        
+                    <label for="input">Email</label>
+                    <input type="text" name="email" id="email" placeholder="you@domain.com"><br>
+                   
+                    </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="myFunction()">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+       
+    </body>
+</html>

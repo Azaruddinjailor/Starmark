@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv= "X-UA-Compatible" content=" IE=edge">
+         <title>User Form</title>
+          <link href="D:\HTML\bootstrap\css\bootstrap.css" rel="stylesheet"/>
+         <link href="D:\HTML\bootstrap\css\bootstrap-responsive.css" rel="stylesheet"/>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+
+    <style>
+        .container{
+            width: 30%;
+            height: 300px;
+            background-color: rgb(209, 231, 245);
+            margin-top: 30px;
+            border: 10px solid black;
+            
+        }
+    </style>
+    <script>
+    
+            var name1= document.getElementById('firstname');
+            var email1= document.getElementById('email');
+            var lname =  document.getElementById('lastname');
+            $(document).ready(function(){
+            $('.submit').click(function(){
+                
+            $.ajax({
+            url: "https://reqres.in/api/users",
+            type: "POST",
+            data :
+            {
+                    first_name:name1,
+                    last_name:lname,
+                    email : email1,
+            },
+            success: function(response){
+                console.log(response);                
+            }
+        });
+        });
+        });
+        </script>
+        
+
+    <body>
+        
+        <div class="container" id="form">
+            <center><h5> User Details</h5> </center>
+            <form >
+
+            <div class="userform" style="margin-left: 20px">
+
+            <label for="input">First Name</label>
+            <input type="text" name="name" id="firstname" placeholder="John" >
+
+            <label for="input">Last Name</label>
+            <input type="text" name="name" id="lastname" placeholder="Doe">
+
+            <label for="input">Email</label>
+            <input type="text" name="email" id="email" placeholder="you@domain.com"><br>
+            <input type="submit" value="Submit" class="submit" style="background-color: lightskyblue">
+            </div>
+        </form>
+        </div>
+   
+    </body>

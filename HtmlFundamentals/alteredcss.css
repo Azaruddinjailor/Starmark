@@ -1,0 +1,13 @@
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #beaaaa;
+}
+
+.table-hover tbody tr:hover > td,
+.table-hover tbody tr:hover > th {
+  background-color: #4fbdd8;
+}
+.span4{
+    
+    background-color:red;
+}

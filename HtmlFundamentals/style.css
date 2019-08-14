@@ -1,0 +1,27 @@
+body{
+    
+    background-color:cornflowerblue;
+    color:black;
+}
+div{
+    background-color: azure;
+}
+
+p:hover{
+    background-color: crimson;
+}
+
+div p{
+    background-color: coral;
+}
+table{
+    
+    border-collapse: collapse;
+}
+#button input:last-child{
+    position: fixed;
+    top : 20px;
+    left : 100px;
+
+}
+

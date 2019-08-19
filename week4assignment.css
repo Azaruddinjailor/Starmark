@@ -1,0 +1,30 @@
+  table {
+            font-family: 'Calibri';
+            text-align: center;
+
+        }
+
+        #firstname,
+        #lastname,
+        #email {
+            width: 80%;
+        }
+
+        #id {
+            border-radius: 10px;
+        }
+
+        #form {
+            width: 30%;
+        }
+
+        .container {
+            border-radius: 20px;
+           
+            padding-left: 4%;
+            background-color: white;
+
+        }
+.modal{
+    height: 23%;
+}
